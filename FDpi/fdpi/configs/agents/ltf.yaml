@@ -1,0 +1,22 @@
+_target_: navsim.agents.transfuser.latent_transfuser_front_only_agent.LatentTransfuserFrontOnlyAgent
+_convert_: 'all'
+
+config:
+  _target_: navsim.agents.transfuser.transfuser_config.TransfuserConfig
+  _convert_: 'all'
+
+  trajectory_sampling:
+    _target_: nuplan.planning.simulation.trajectory.trajectory_sampling.TrajectorySampling
+    _convert_: 'all'
+    time_horizon: 4
+    interval_length: 0.5
+
+  latent: True
+
+  camera_width: 960
+  camera_height: 512
+  img_vert_anchors: 16
+  img_horz_anchors: 30
+
+checkpoint_path: null  # set by fdpi.agents.build_agent
+lr: 1e-4

@@ -1,0 +1,4 @@
+__pycache__/
+*.egg-info/
+navsim/agents/sparsedrive/ops/build/
+navsim/agents/sparsedrive/ops/*.so

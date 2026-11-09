@@ -1,0 +1,19 @@
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+build/
+dist/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Local checkpoints and outputs
+*.pt
+*.pth
+*.safetensors
+checkpoints/
+outputs/
+logs/

@@ -1,0 +1,17 @@
+# Tested with: Python 3.10, torch 2.10.0+cu128, diffusers 0.36.0,
+# transformers 5.1.0, flash-attn 2.8.3 on an RTX PRO 6000 (96 GB).
+torch>=2.4
+diffusers>=0.31
+transformers>=4.46
+huggingface_hub>=0.25
+safetensors
+einops
+ftfy
+regex
+numpy
+Pillow
+fastapi
+uvicorn
+python-multipart
+# Optional but recommended (falls back to PyTorch SDPA if absent):
+# flash-attn

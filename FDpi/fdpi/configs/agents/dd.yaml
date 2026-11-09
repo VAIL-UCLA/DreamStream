@@ -1,0 +1,26 @@
+_target_: navsim.agents.diffusiondrive.transfuser_agent_front_only.DiffusionDriveFrontOnlyAgent
+_convert_: 'all'
+
+config:
+  _target_: navsim.agents.diffusiondrive.transfuser_config.TransfuserConfig
+  _convert_: 'all'
+
+  trajectory_sampling:
+    _target_: nuplan.planning.simulation.trajectory.trajectory_sampling.TrajectorySampling
+    _convert_: 'all'
+    time_horizon: 4
+    interval_length: 0.5
+
+  latent: True
+
+  camera_width: 960
+  camera_height: 512
+  img_vert_anchors: 16
+  img_horz_anchors: 30
+
+  # ResNet-34 init weights come from timm / Hugging Face; the checkpoint overwrites them.
+  bkb_path: null
+  plan_anchor_path: ${ckpt_dir}/aux/kmeans_navsim_traj_20.npy
+
+checkpoint_path: null  # set by fdpi.agents.build_agent
+lr: 6e-4

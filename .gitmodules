@@ -1,0 +1,4 @@
+[submodule "BridgeSim"]
+	path = BridgeSim
+	url = https://github.com/VAIL-UCLA/BridgeSim.git
+	branch = dreamstream

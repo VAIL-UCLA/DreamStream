@@ -1,0 +1,28 @@
+_target_: navsim.agents.rap_dino.rap_agent.RAPAgent
+_convert_: 'all'
+
+config:
+  _target_: navsim.agents.rap_dino.navsim_config.RAPConfig
+  _convert_: 'all'
+
+  trajectory_sampling:
+    _target_: nuplan.planning.simulation.trajectory.trajectory_sampling.TrajectorySampling
+    _convert_: 'all'
+    # RAP was trained with a 5 s horizon (10 poses at 0.5 s).
+    time_horizon: 5
+    interval_length: 0.5
+
+  latent: False
+  distill_feature: True
+  pdm_scorer: True
+  cache_data: False
+  train_metric_cache_path: null  # training only
+
+  # Front camera only.
+  cameras: [cam_f0]
+
+  # [H, W] every camera image is resized to first; set by fdpi.agents.build_agent.
+  image_resize_hw: null
+
+checkpoint_path: null  # set by fdpi.agents.build_agent
+lr: 1e-4

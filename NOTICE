@@ -1,0 +1,97 @@
+DreamStream
+Copyright 2026 The DreamStream Authors (UCLA, Toyota Research Institute)
+
+Unless otherwise noted, this repository is licensed under the Apache License,
+Version 2.0 (see LICENSE). Some files are derived from third-party projects
+under the licenses listed below; those files keep their original notices.
+
+IMPORTANT: two files are derived from CausVid and are licensed under
+CC BY-NC-SA 4.0 (non-commercial, share-alike). Because the inference pipeline
+depends on them, the release as a whole may only be used for non-commercial
+purposes. The released model weights are likewise for non-commercial research
+use only.
+
+-------------------------------------------------------------------------------
+Third-party components
+-------------------------------------------------------------------------------
+
+1. Wan2.1 / Wan2.2 (Alibaba Wan Team) — Apache License 2.0
+   https://github.com/Wan-Video/Wan2.1, https://github.com/Wan-Video/Wan2.2
+   Copyright 2024-2025 The Alibaba Wan Team Authors.
+   Files: DreamStream/stream_package/models/wan_base/**
+   Modified by the DreamStream authors: unused classes and functions removed.
+   wan_base/modules/t5.py is in turn modified from Hugging Face Transformers
+   (Apache License 2.0).
+
+2. CausVid (Tianwei Yin et al.) — CC BY-NC-SA 4.0
+   https://github.com/tianweiy/CausVid
+   https://creativecommons.org/licenses/by-nc-sa/4.0/
+   Files: DreamStream/stream_package/models/causal_wan_model.py (adapted)
+          DreamStream/stream_package/utils/flow_match.py (copied)
+   Modified by the DreamStream authors: training-only code paths removed and
+   KV-cache streaming attention added.
+
+3. Self Forcing (Xun Huang et al.) — Apache License 2.0
+   https://github.com/guandeh17/Self-Forcing
+   The streaming KV-cache inference pipeline builds on Self Forcing.
+
+4. VideoX-Fun / Wan2.2-Fun-5B-Control (Alibaba PAI) — Apache License 2.0
+   https://github.com/aigc-apps/VideoX-Fun
+   https://huggingface.co/alibaba-pai/Wan2.2-Fun-5B-Control
+   Base model weights (downloaded at runtime, not redistributed here) and the
+   control-conditioning layout.
+
+5. TAEHV (Ollin Boer Bohan) — MIT License
+   https://github.com/madebyollin/taehv
+   Copyright (c) 2025 Ollin Boer Bohan.
+   File: DreamStream/stream_package/models/tiny_vae.py (adapted)
+   The TinyVAE decoder (used by default) downloads the taew2_2 weights
+   at runtime from https://huggingface.co/lightx2v/Autoencoders (not
+   redistributed here).
+
+   Permission is hereby granted, free of charge, to any person obtaining a
+   copy of this software and associated documentation files (the "Software"),
+   to deal in the Software without restriction, including without limitation
+   the rights to use, copy, modify, merge, publish, distribute, sublicense,
+   and/or sell copies of the Software, and to permit persons to whom the
+   Software is furnished to do so, subject to the following conditions:
+   The above copyright notice and this permission notice shall be included in
+   all copies or substantial portions of the Software.
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED.
+
+6. BridgeSim (VAIL-UCLA/BridgeSim, branch dreamstream) — Apache License 2.0
+   https://github.com/VAIL-UCLA/BridgeSim/tree/dreamstream
+   Included as a git submodule (BridgeSim/) under its own license. Built on
+   MetaDrive and ScenarioNet (Apache License 2.0) and nuplan-devkit (Apache
+   License 2.0). Its front-camera policy code adapts DiffusionDrive and
+   DiffusionDriveV2 (MIT, HUST Vision Lab), DrivoR, RAP, SparseDriveV2 and
+   NAVSIM (Apache License 2.0); see BridgeSim/docs/dreamstream_third_party.md.
+   Front-camera policy checkpoints: https://huggingface.co/UCLA-VAIL/DreamStream
+   under policy/ (non-commercial research use).
+
+7. FDπ evaluation code (FDpi/)
+   FDpi/navsim/ contains the parts of NAVSIM needed to run the FDπ policy
+   panel, and the policy code of DrivoR, DiffusionDrive, RAP and SparseDriveV2,
+   adapted to a single front camera (unused files removed). Each directory
+   keeps its upstream LICENSE file.
+   - NAVSIM (autonomousvision/navsim) — Apache License 2.0
+     https://github.com/autonomousvision/navsim
+     Files: FDpi/navsim/** (incl. agents/transfuser)
+   - DrivoR (valeoai/DrivoR) — Apache License 2.0
+     https://github.com/valeoai/DrivoR
+     Files: FDpi/navsim/agents/drivoR/**
+   - DiffusionDrive (hustvl/DiffusionDrive) — MIT License,
+     Copyright (c) 2024 HUST Vision Lab
+     https://github.com/hustvl/DiffusionDrive
+     Files: FDpi/navsim/agents/diffusiondrive/**
+   - RAP (vita-epfl/RAP) — Apache License 2.0
+     https://github.com/vita-epfl/RAP
+     Files: FDpi/navsim/agents/rap_dino/**
+   - SparseDriveV2 (swc-17/SparseDriveV2) — Apache License 2.0
+     https://github.com/swc-17/SparseDriveV2
+     Files: FDpi/navsim/agents/sparsedrive/**
+   nuplan-devkit and nuscenes-devkit (Apache License 2.0) are installed as
+   dependencies and not redistributed. Policy checkpoints:
+   https://huggingface.co/UCLA-VAIL/DreamStream under policy/ (non-commercial
+   research use); RAP checkpoint from https://huggingface.co/Lanl11/RAP_ckpts.

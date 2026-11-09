@@ -1,0 +1,38 @@
+_target_: navsim.agents.sparsedrive.sparsedrive_agent.SparseDriveAgent
+_convert_: 'all'
+
+trajectory_sampling:
+  _target_: nuplan.planning.simulation.trajectory.trajectory_sampling.TrajectorySampling
+  _convert_: 'all'
+  time_horizon: 4
+  interval_length: 0.5
+
+config:
+  _target_: navsim.agents.sparsedrive.sparsedrive_config.SparseDriveConfig
+  _convert_: 'all'
+
+  # ResNet-34 init weights come from timm / Hugging Face; the checkpoint overwrites them.
+  bkb_path:           null
+  path_anchor:        ${ckpt_dir}/aux/sparsedrive/kmeans/path_1024.npy
+  velocity_anchor:    ${ckpt_dir}/aux/sparsedrive/kmeans/velocity_256.npy
+  trajectory_anchor:  ${ckpt_dir}/aux/sparsedrive/kmeans/trajectory_1024_256.npz
+
+  # The checkpoint uses the navsim v1 scoring heads.
+  dataset_version: "v1"
+  metrics:
+    - no_at_fault_collisions
+    - drivable_area_compliance
+    - driving_direction_compliance
+    - time_to_collision_within_bound
+    - ego_progress
+    - comfort
+
+  # Front camera only.
+  cams: ["cam_f0"]
+  velocity_filter_num: [64, 20]
+
+  # [H, W] every camera image is resized to first; set by fdpi.agents.build_agent.
+  image_resize_hw: null
+
+checkpoint_path: null  # set by fdpi.agents.build_agent
+lr: 1e-4
